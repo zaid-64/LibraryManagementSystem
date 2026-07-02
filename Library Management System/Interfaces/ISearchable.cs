@@ -8,6 +8,6 @@ namespace Library_Management_System.Interfaces
 {
     public interface ISearchable
     {
-        bool MatchesSearchQuery(string query);
+        bool MatchesQuery(string query);
     }
 }

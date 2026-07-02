@@ -9,7 +9,7 @@ namespace Library_Management_System.Models
     public abstract class LibraryItem
     {
         public int Id { set; get; }
-        public String Title { set; get; }
+        public String? Title { set; get; }
         public DateTime AddedDate { set; get; }
 
 
