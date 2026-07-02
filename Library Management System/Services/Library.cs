@@ -96,13 +96,10 @@ namespace Library_Management_System.Services
                 }
             }
 
-            if (targetBook == null)
+            if (targetBook == null || targetMember == null)
             {
-                Console.WriteLine($"Error: Book with ID {bookId} not found.");
-            }
-            if (targetMember == null)
-            {
-                Console.WriteLine($"Error: Member with ID {memberId} not found.");
+                Console.WriteLine("Error: Member or Book not found.");
+                return;
             }
 
             if (targetBook.IsAvailable == false)
@@ -151,9 +148,9 @@ namespace Library_Management_System.Services
         public void ReturnBook(int bookId)
         {
             BorrowRecord targetRecord = null;
-            for (int i = 0; i < _borrowRecord.Length; i++)
+            for (int i = 0; i < _recordCount; i++)
             {
-                if (_borrowRecord[i].Id == bookId && _borrowRecord[i].ReturnDate == null)
+                if (_borrowRecord[i].Book.Id == bookId && _borrowRecord[i].ReturnDate == null)
                 {
                     targetRecord = _borrowRecord[i];
                     break;
@@ -242,7 +239,7 @@ namespace Library_Management_System.Services
         {
             bool foundAny = false;
 
-            for (int i =0; i< _bookCount ; i++)
+            for (int i = 0; i< _recordCount; i++)
             {
                 if (_borrowRecord[i].Member.Id== memberId)
                 {
