@@ -1,9 +1,5 @@
 ﻿using Library_Management_System.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library_Management_System.Models
 {
@@ -17,9 +13,13 @@ namespace Library_Management_System.Models
         public DateTime JoinDate { set; get; }
         public Book[] BorrowedBooks { set; get; }
 
-        public Member()
+        public Member() : this(3)
         {
-            BorrowedBooks = new Book[MaxBorrowLimit];
+        }
+
+        protected Member(int maxBorrowLimit)
+        {
+            BorrowedBooks = new Book[maxBorrowLimit];
         }
 
         public virtual string GetInfo()
@@ -30,19 +30,16 @@ namespace Library_Management_System.Models
         public bool MatchesQuery(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
-            {  
+            {
                 return false;
             }
-      
+
             string lowerQuery = query.ToLower();
 
             bool nameMatches = Name != null && Name.ToLower().Contains(lowerQuery);
             bool emailMatches = Email != null && Email.ToLower().Contains(lowerQuery);
 
             return nameMatches || emailMatches;
-
         }
-
-
     }
 }
